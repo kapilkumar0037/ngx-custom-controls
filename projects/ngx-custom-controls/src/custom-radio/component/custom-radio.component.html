@@ -1,0 +1,9 @@
+<input type="radio"  [ngClass]="styleClass()" [disabled]="disabled"
+    [value]="option()" [checked]="value===option()" (change)="onInputChange($event)" (blur)="onTouched()">
+<ng-content></ng-content>
+
+@if(validationErrors && (isTouched || isDirty)) {
+@for(error of errorMessages; track error){
+<div class="invalid-feedback d-block">{{ error }}</div>
+}
+}

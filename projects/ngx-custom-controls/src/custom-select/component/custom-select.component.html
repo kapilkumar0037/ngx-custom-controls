@@ -1,0 +1,8 @@
+<select [ngClass]="styleClass()" [disabled]="disabled" aria-label="Default select example" [value]="value" (input)="onInputChange($event)" (blur)="onTouched()">
+   <ng-content></ng-content>
+</select>
+@if(validationErrors && (isTouched || isDirty)) {
+@for(error of errorMessages; track error){
+<div class="invalid-feedback d-block">{{ error }}</div>
+}
+}

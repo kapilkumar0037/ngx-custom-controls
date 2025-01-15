@@ -1,0 +1,9 @@
+<input [id]="controlId()" [ngClass]="styleClass()" [disabled]="disabled" type="checkbox" [checked]="value" (change)="onInputChange($event)"
+    (blur)="onTouched()">
+<ng-content></ng-content>
+
+@if(validationErrors && (isTouched || isDirty)) {
+@for(error of errorMessages; track error){
+<div class="invalid-feedback d-block">{{ error }}</div>
+}
+}

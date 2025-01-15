@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/ngx-custom-controls",
       "sourceRoot": "projects/ngx-custom-controls/src",
-      "prefix": "lib",
+      "prefix": "ngcc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -65,6 +65,7 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/demo-app/src/styles.scss"
             ],
             "scripts": []

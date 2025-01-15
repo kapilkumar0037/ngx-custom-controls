@@ -1,0 +1,8 @@
+<input [id]="controlId()" [disabled]="disabled" [ngClass]="styleClass()" type="{{type()}}" [value]="value" (input)="onInputChange($event)"
+    (blur)="markAsTouched()" [attr.placeholder]="placeholder()"/>
+
+@if(validationErrors && (isTouched || isDirty)) {
+@for(error of errorMessages; track error){
+<div class="invalid-feedback d-block">{{ error }}</div>
+}
+}

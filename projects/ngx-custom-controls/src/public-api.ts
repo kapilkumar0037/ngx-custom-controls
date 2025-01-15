@@ -1,6 +1,9 @@
 /*
- * Public API Surface of ngx-custom-controls
+ * Public API Surface of ngx-omega-bootstrap
  */
-
-export * from './lib/ngx-custom-controls.service';
-export * from './lib/ngx-custom-controls.component';
+export * from './custom-checkbox';
+export * from './custom-radio';
+export * from './custom-select';
+export * from './custom-datepicker';
+export * from './custom-input';
+export * from './custom-range';

@@ -1,0 +1,8 @@
+<input type="range" class="{{styleClass()}}" [min]="min()" [max]="max()" [step]="step()" [id]="controlId()" [value]="value" [disabled]="disabled" (change)="onInputChange($event)"
+(blur)="onTouched()">
+
+@if(validationErrors && (isTouched || isDirty)) {
+    @for(error of errorMessages; track error){
+    <div class="invalid-feedback d-block">{{ error }}</div>
+    }
+    }

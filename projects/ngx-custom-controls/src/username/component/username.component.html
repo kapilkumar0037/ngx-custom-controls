@@ -1,0 +1,8 @@
+<input class="form-control" type="text" [value]="value" (input)="onInputChange($event)" (blur)="onTouched()"
+    [attr.placeholder]="placeholder()" />
+
+@if(validationErrors) {
+    @for(error of errorMessages; track error){
+        <div class="error">{{ error }}</div>
+    }
+}
