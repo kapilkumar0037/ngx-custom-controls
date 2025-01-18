@@ -35,7 +35,7 @@ export class AppComponent {
   radioOption: IOptions[] = [{ value: '1', label: 'Male' }, { value: '2', label: 'Female' }];
   selectedRadio = "1";
   selectedRangeValue = 3;
-  selectedDate = '21-12-2018';
+  selectedDate = '';
   validators = [
     { validator: Validators.required, message: 'Username is required.' },
     { validator: Validators.minLength(5), message: 'Username must be at least 5 characters long.' },

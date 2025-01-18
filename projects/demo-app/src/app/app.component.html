@@ -5,7 +5,7 @@
       [type]="'email'" [placeholder]="'Email'"></ngo-custom-input>
 
     {{emailform.invalid}}
-    <ngo-custom-datepicker [(ngModel)]="selectedDate"></ngo-custom-datepicker>
+    <ngo-custom-datepicker name="date-picker" type="datetime-local" [(ngModel)]="selectedDate" [min]="'2025-01-01T00:00'" [max]="'2025-01-31T00:00'"></ngo-custom-datepicker>
     {{selectedDate}}
   </form>
 

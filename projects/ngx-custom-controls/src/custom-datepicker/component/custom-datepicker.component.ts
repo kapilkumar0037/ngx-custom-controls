@@ -12,14 +12,10 @@ import { cvaProviders } from '../../shared/providers/cva-providers';
 })
 export class CustomDatepickerComponent extends BaseCvaImplementationDirective<string> {
   styleClass = input('form-control');
+  type = input<string>('date');
+  min = input<string>('');
+  max = input<string>('');
   ngOnInit() {
     this.value = '';
-  }
-
-  onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.value = inputElement.value;
-    this.onChange(this.value);
-    this.runValidators();
   }
 }

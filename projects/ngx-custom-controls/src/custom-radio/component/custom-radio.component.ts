@@ -14,10 +14,4 @@ export class CustomRadioComponent extends BaseCvaImplementationDirective<string>
   styleClass = input('form-check-input');
   option = input.required<string>();
 
-  onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.value = inputElement.value;
-    this.onChange(this.value);
-    this.runValidators();
-  }
 }

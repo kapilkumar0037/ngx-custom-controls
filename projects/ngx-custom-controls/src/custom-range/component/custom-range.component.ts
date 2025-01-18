@@ -14,10 +14,5 @@ export class CustomRangeComponent extends BaseCvaImplementationDirective<string>
   min = input<number>(0) ;
   max = input<number>(100) ;
   step = input<number>(1) ;
-  onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.value = inputElement.value;
-    this.onChange(this.value);
-    this.runValidators();
-  }
+
 }

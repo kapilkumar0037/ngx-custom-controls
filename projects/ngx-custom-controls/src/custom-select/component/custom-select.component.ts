@@ -15,11 +15,4 @@ export class CustomSelectComponent extends BaseCvaImplementationDirective<string
   ngOnInit() {
     this.value = '';
   }
-
-  onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.value = inputElement.value;
-    this.onChange(this.value);
-    this.runValidators();
-  }
 }
