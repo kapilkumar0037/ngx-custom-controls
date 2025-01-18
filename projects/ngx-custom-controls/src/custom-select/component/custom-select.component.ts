@@ -1,18 +1,14 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
 import { NgClass } from '@angular/common';
-import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cvaProviders } from '../../shared/providers/cva-providers';
 
 @Component({
-  selector: 'ngo-custom-select',
+  selector: 'ngcc-custom-select',
   imports: [NgClass],
   templateUrl: './custom-select.component.html',
   providers: [...cvaProviders(CustomSelectComponent)]
 })
 export class CustomSelectComponent extends BaseCvaImplementationDirective<string>{
   styleClass = input('form-select');
-  ngOnInit() {
-    this.value = '';
-  }
 }

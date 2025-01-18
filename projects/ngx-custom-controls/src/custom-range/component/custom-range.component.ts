@@ -1,10 +1,9 @@
-import { Component, forwardRef, input } from '@angular/core';
-import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, input } from '@angular/core';
 import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
 import { cvaProviders } from '../../shared/providers/cva-providers';
 
 @Component({
-  selector: 'ngo-custom-range',
+  selector: 'ngcc-custom-range',
   imports: [],
   templateUrl: './custom-range.component.html',
   providers: [...cvaProviders(CustomRangeComponent)]  
@@ -14,5 +13,4 @@ export class CustomRangeComponent extends BaseCvaImplementationDirective<string>
   min = input<number>(0) ;
   max = input<number>(100) ;
   step = input<number>(1) ;
-
 }

@@ -7,7 +7,7 @@ export abstract class BaseCvaImplementationDirective<T> implements ControlValueA
   validators = input<ValidatorWithMessage[]>([]);
   name = input<string>('');
   controlId = input<string>();
-  value!: T | null;
+  value!: T;
   validationErrors: ValidationErrors | null = null;
   errorMessages: string[] = [];
   isTouched = false;
