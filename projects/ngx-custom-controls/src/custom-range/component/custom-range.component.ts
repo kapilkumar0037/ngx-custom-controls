@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
-import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
 import { cvaProviders } from '../../shared/providers/cva-providers';
+import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
 
 @Component({
   selector: 'ngcc-custom-range',
   imports: [],
+  standalone: true,
   templateUrl: './custom-range.component.html',
   providers: [...cvaProviders(CustomRangeComponent)]  
 })

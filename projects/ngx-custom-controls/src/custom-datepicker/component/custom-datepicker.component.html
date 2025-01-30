@@ -1,5 +1,5 @@
-<input [type]="type()" [id]="controlId()" [disabled]="disabled" [ngClass]="styleClass()"
-    [value]="value" (input)="onInputChange($event)" (blur)="markAsTouched()" [min]="min()" [max]="max()"/>
+<input [type]="type()" #datepicker [id]="controlId()" [disabled]="disabled" [ngClass]="styleClass()"
+    [value]="value" (input)="onInputChange(datepicker.value)" (blur)="markAsTouched()" [min]="min()" [max]="max()"/>
 
 
 @if(validationErrors && (isTouched || isDirty)) {

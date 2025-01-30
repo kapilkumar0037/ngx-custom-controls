@@ -1,4 +1,4 @@
-<select [ngClass]="styleClass()" [disabled]="disabled" aria-label="Default select example" [value]="value" (input)="onInputChange($event)" (blur)="onTouched()">
+<select [ngClass]="styleClass()" #select [disabled]="disabled" aria-label="Default select example" [value]="value" (input)="onInputChange(select.value)" (blur)="onTouched()">
    <ng-content></ng-content>
 </select>
 @if(validationErrors && (isTouched || isDirty)) {

@@ -1,5 +1,5 @@
-<input type="radio"  [ngClass]="styleClass()" [disabled]="disabled"
-    [value]="option()" [checked]="value===option()" (change)="onInputChange($event)" (blur)="onTouched()">
+<input type="radio" #radio  [ngClass]="styleClass()" [disabled]="disabled"
+    [value]="option()" [checked]="value===option()" (change)="onInputChange(radio.value)" (blur)="onTouched()">
 <ng-content></ng-content>
 
 @if(validationErrors && (isTouched || isDirty)) {

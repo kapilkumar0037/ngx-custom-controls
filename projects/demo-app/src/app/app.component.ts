@@ -1,17 +1,18 @@
-import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { CustomCheckboxComponent } from '../../../ngx-custom-controls/src/custom-checkbox';
-import { CustomDatepickerComponent } from '../../../ngx-custom-controls/src/custom-datepicker';
-import { CustomInputComponent } from '../../../ngx-custom-controls/src/custom-input';
-import { CustomRadioComponent } from '../../../ngx-custom-controls/src/custom-radio';
-import { CustomRangeComponent } from '../../../ngx-custom-controls/src/custom-range';
-import { CustomSelectComponent } from '../../../ngx-custom-controls/src/custom-select';
+
 import { IOptions } from '../../../ngx-custom-controls/src/utils/src/models';
+import { NgClass } from '@angular/common';
+import { CustomCheckboxComponent } from 'ngx-custom-controls/src/custom-checkbox/component/custom-checkbox.component';
+import { CustomInputComponent } from 'ngx-custom-controls/src/custom-input/component/custom-input.component';
+import { CustomSelectComponent } from 'ngx-custom-controls/src/custom-select/component/custom-select.component';
+import { CustomRadioComponent } from 'ngx-custom-controls/src/custom-radio/component/custom-radio.component';
+import { CustomRangeComponent } from 'ngx-custom-controls/src/custom-range/component/custom-range.component';
+import { CustomDatepickerComponent } from 'ngx-custom-controls/src/custom-datepicker/component/custom-datepicker.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ NgClass,
+  imports: [NgClass,
     FormsModule,
     CustomCheckboxComponent,
     CustomInputComponent,

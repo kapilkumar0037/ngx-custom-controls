@@ -1,6 +1,6 @@
 import { Directive, effect, input } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
-import { ValidatorWithMessage } from '../../utils/src/models';
+import { ValidatorWithMessage } from '../models';
 
 @Directive()
 export abstract class BaseCvaImplementationDirective<T> implements ControlValueAccessor, Validator {
@@ -17,17 +17,9 @@ export abstract class BaseCvaImplementationDirective<T> implements ControlValueA
   onChange: (value: T) => void = () => { };
   onTouched: () => void = () => { };
 
-  onInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.type === 'checkbox') {
-      this.value = inputElement.checked as unknown as T;
-    } else if (inputElement.type === 'number') {
-      const parsedValue = parseFloat(inputElement.value);
-      this.value = (isNaN(parsedValue) ? null : parsedValue) as unknown as T;
-    } else {
-      this.value = inputElement.value as unknown as T;
-    }
-    this.onChange(this.value);
+  onInputChange(value: T): void {  
+    this.value = value;
+    this.onChange(value);
     this.runValidators();
   }
   constructor() {

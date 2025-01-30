@@ -1,4 +1,4 @@
-<input type="range" class="{{styleClass()}}" [min]="min()" [max]="max()" [step]="step()" [id]="controlId()" [value]="value" [disabled]="disabled" (change)="onInputChange($event)"
+<input type="range" #range class="{{styleClass()}}" [min]="min()" [max]="max()" [step]="step()" [id]="controlId()" [value]="value" [disabled]="disabled" (change)="onInputChange(range.value)"
 (blur)="onTouched()">
 
 @if(validationErrors && (isTouched || isDirty)) {

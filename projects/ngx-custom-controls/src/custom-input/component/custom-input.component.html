@@ -1,4 +1,4 @@
-<input [id]="controlId()" [disabled]="disabled" [ngClass]="styleClass()" type="{{type()}}" [value]="value" (input)="onInputChange($event)"
+<input [id]="controlId()" #input [disabled]="disabled" [ngClass]="styleClass()" type="{{type()}}" [value]="value" (input)="onInputChange(input.value)"
     (blur)="markAsTouched()" [attr.placeholder]="placeholder()"/>
 
 @if(validationErrors && (isTouched || isDirty)) {
