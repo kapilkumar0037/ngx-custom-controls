@@ -5,15 +5,17 @@
       [type]="'email'" [placeholder]="'Email'"></ngcc-custom-input>
 
     {{emailform.invalid}}
-    <ngcc-custom-datepicker name="date-picker" type="datetime-local" [(ngModel)]="selectedDate" [min]="'2025-01-01T00:00'" [max]="'2025-01-31T00:00'"></ngcc-custom-datepicker>
+    <ngcc-custom-datepicker name="date-picker" type="datetime-local" [(ngModel)]="selectedDate"
+      [min]="'2025-01-01T00:00'" [max]="'2025-01-31T00:00'"></ngcc-custom-datepicker>
     {{selectedDate}}
   </form>
 
   {{email}}
   <br>
   <div class="form-floating mb-3">
-    <ngcc-custom-input controlId="phonenumber" placeholder="9876543210" [(ngModel)]="phone" [validators]="phoneValidators" [type]="'number'">
-      <label for="phonenumber">Email address</label>
+    <ngcc-custom-input controlId="phonenumber" placeholder="9876543210" disabled [(ngModel)]="phone"
+      [validators]="phoneValidators" [type]="'number'">
+      <label for="phonenumber">Phone Number</label>
     </ngcc-custom-input>
 
 
@@ -73,4 +75,19 @@
   <ngcc-custom-range [min]="1" [max]="90" [step]="1" [(ngModel)]="selectedRangeValue"
     [validators]="rangeValidators"></ngcc-custom-range>
   {{selectedRangeValue}}
+
+  <br>
+  <div>Reactive form example</div>
+  <form [formGroup]="ageForm">
+    <ngcc-custom-input controlId="age" placeholder="21" formControlName="age" [validators]="ageValidators"
+      [type]="'number'">
+      <label for="age">Age</label>
+    </ngcc-custom-input>
+  </form>
+  {{ageForm.get('age')?.value}}
+
+  <ngcc-custom-input controlId="tage" placeholder="22" [(ngModel)]="age" [validators]="ageValidators" [type]="'number'">
+    <label for="tage">Age</label>
+  </ngcc-custom-input>
+
 </div>

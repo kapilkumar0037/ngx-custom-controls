@@ -8,4 +8,6 @@ export { CustomSelectComponent } from './custom-select/component/custom-select.c
 export { CustomInputComponent } from './custom-input/component/custom-input.component';
 export { CustomDatepickerComponent } from './custom-datepicker/component/custom-datepicker.component';
 
-
+export { BaseCvaImplementationDirective} from './shared/directives/base-cva-implementation.directive';
+export { ValidationMessagesComponent } from './shared/components/validation-messages/validation-messages.component';
+export { cvaProviders } from './shared/providers/cva-providers';

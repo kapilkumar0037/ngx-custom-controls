@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 import { IOptions } from '../../../ngx-custom-controls/src/utils/src/models';
 import { NgClass } from '@angular/common';
@@ -14,6 +14,7 @@ import { CustomDatepickerComponent } from 'ngx-custom-controls/src/custom-datepi
   selector: 'app-root',
   imports: [NgClass,
     FormsModule,
+    ReactiveFormsModule,
     CustomCheckboxComponent,
     CustomInputComponent,
     CustomSelectComponent,
@@ -73,4 +74,24 @@ export class AppComponent {
       return value > min ? null : { rangeRequired: { minValue: min } };
     };
   }
+
+  age = 22;
+  ageForm = new FormGroup({
+    age: new FormControl(22)
+  });
+  ageValidators = [
+    {
+      validator: Validators.required,
+      message: 'Age is required'
+    },
+    {
+      validator: Validators.min(18),
+      message: 'Must be at least 18 years old'
+    },
+    {
+      validator: Validators.max(100),
+      message: 'Must be less than 100 years old'
+    }
+  ];
+
 }

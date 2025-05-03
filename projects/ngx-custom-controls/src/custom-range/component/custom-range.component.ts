@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { cvaProviders } from '../../shared/providers/cva-providers';
 import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
-import { ValidationMessagesComponent } from 'ngx-custom-controls/src/shared/components/validation-messages/validation-messages.component';
+import { ValidationMessagesComponent } from '../../shared/components/validation-messages/validation-messages.component';
 
 @Component({
   selector: 'ngcc-custom-range',
