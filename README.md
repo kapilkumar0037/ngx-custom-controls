@@ -1,6 +1,6 @@
 # NGX Custom Controls
 
-A flexible Angular library providing custom form controls that work independently with both template-driven and reactive forms. At its core, the library provides a powerful base directive (`BaseCvaImplementationDirective<T>`) that implements both `ControlValueAccessor` and `Validator` interfaces, making it easy to create custom form controls with built-in validation support.
+Angular library which provides a powerful base directive (`BaseCvaImplementationDirective<T>`) that implements both `ControlValueAccessor` and `Validator` interfaces, making it easy to create custom form controls with built-in validation support. Every custom control implemented by extending the base directive will support both template-driven and reactive forms. Library also provides basic control components created using base directive and bootstrap css. 
 
 If you find this library helpful, please consider giving it a ⭐ on [GitHub](https://github.com/kapilkumar0037/ngx-custom-controls)!
 
@@ -9,7 +9,7 @@ If you find this library helpful, please consider giving it a ⭐ on [GitHub](ht
 - **Simplified Custom Control Creation**: Create your own form controls by extending the base directive, eliminating the need to implement complex form control interfaces manually
 - **Type-Safe**: Fully generic implementation allows you to specify the type of value your control will handle
 - **Framework Agnostic**: Works seamlessly with both template-driven and reactive forms
-- **Validation Made Easy**: Built-in support for custom validators with human-readable messages
+- **Validation Made Easy**: We can use
 - **DRY Principle**: The base directive handles all the boilerplate code for form integration
 
 ## Features
@@ -71,6 +71,7 @@ export class ExampleComponent {
   ];
 }
 ```
+We just need to write all applicable validators and provide it to the control and everything else will be handled by the directive.
 
 ## Creating Custom Controls
 
@@ -84,16 +85,12 @@ import { BaseCvaImplementationDirective } from 'ngx-custom-controls';
 @Component({
   selector: 'app-custom-control',
   template: `
-    <input
-      [value]="value"
-      [id]="controlId()"
-      [name]="name()"
-      [disabled]="disabled"
-      (input)="onInputChange($event.target.value)"
-      (blur)="markAsTouched()">
-    <div *ngIf="errorMessages.length" class="error-messages">
-      <span *ngFor="let message of errorMessages">{{message}}</span>
-    </div>
+    <input [id]="controlId()" #input [disabled]="disabled" [ngClass]="styleClass()" type="{{type()}}" [value]="value" (input)="onInputChange(input.value)"
+    (blur)="markAsTouched()" [attr.placeholder]="placeholder()"/>
+
+    @if(validationErrors && (isTouched || isDirty)) {
+        <ngcc-validation-messages [errorMessages]="errorMessages"></ngcc-validation-messages>
+        }
   `,
   providers: [
     {
@@ -109,72 +106,31 @@ import { BaseCvaImplementationDirective } from 'ngx-custom-controls';
   ]
 })
 export class CustomControlComponent extends BaseCvaImplementationDirective<string> {
-  // Add custom logic here
-}
-```
-
-## Reactive Forms Example
-
-Here's how to create a custom numeric input control that works with reactive forms:
-
-```typescript
-import { Component, forwardRef } from '@angular/core';
-import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
-import { BaseCvaImplementationDirective } from 'ngx-custom-controls';
-
-@Component({
-  selector: 'app-numeric-input',
-  template: `
-    <input
-      type="number"
-      [formControl]="numericControl"
-      [id]="controlId()"
-      [name]="name()"
-      [disabled]="disabled"
-      (input)="onInputChange($event.target.value)"
-      (blur)="markAsTouched()"
-      [class.is-invalid]="errorMessages.length > 0">
-    
-    <div *ngIf="errorMessages.length" class="invalid-feedback">
-      <div *ngFor="let message of errorMessages">{{ message }}</div>
-    </div>
-  `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NumericInputComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => NumericInputComponent),
-      multi: true
-    }
-  ]
-})
-export class NumericInputComponent extends BaseCvaImplementationDirective<number> {
-  // Custom logic for numeric handling
-  override onInputChange(value: any): void {
-    const numValue = parseFloat(value);
-    super.onInputChange(isNaN(numValue) ? null : numValue);
+  styleClass = input('form-control');
+  placeholder = input('Enter');
+  type = input('text');
+  ngOnInit() {
+    this.value = '';
   }
 }
+```
+In most cases you need not to write any code in your control it's only when you need to override something.
 
-// Usage in a parent component:
-@Component({
-  template: `
-    <form [formGroup]="form">
-      <app-numeric-input
-        formControlName="age"
-        controlId="ageInput"
-        [validators]="ageValidators">
-      </app-numeric-input>
-    </form>
-  `
-})
-export class ParentComponent {
-  form: FormGroup;
-  
+## Usage in parent component
+It's time to use your component now
+### Reactive form example
+```html
+  <form [formGroup]="ageForm">
+    <ngcc-custom-input controlId="age" placeholder="21" formControlName="age" [validators]="ageValidators"
+      [type]="'number'">
+      <label for="age">Age</label>
+    </ngcc-custom-input>
+  </form>
+```
+```typescript
+ageForm = new FormGroup({
+    age: new FormControl(22)
+  });
   ageValidators = [
     {
       validator: Validators.required,
@@ -189,22 +145,41 @@ export class ParentComponent {
       message: 'Must be less than 100 years old'
     }
   ];
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      age: [null]
-    });
-  }
-}
 ```
+You se we have just added applicable validators which can also be shared using shared validator class.
 
 This example demonstrates:
-- Creating a numeric input control
+- Creating a custom input component supporting dynamic "type", placeholder and css class
+- Number type input to create age input box.
 - Integration with reactive forms using `formControlName`
 - Custom value parsing
 - Bootstrap validation styling
 - Multiple validators with custom messages
 
+### Template driven form example
+```html
+  <ngcc-custom-input controlId="tage" placeholder="22" [(ngModel)]="age" [validators]="ageValidators" [type]="'number'">
+    <label for="tage">Age</label>
+  </ngcc-custom-input>
+```
+```typescript
+age:number;
+//Same validators used for reactive form control
+ageValidators = [
+    {
+      validator: Validators.required,
+      message: 'Age is required'
+    },
+    {
+      validator: Validators.min(18),
+      message: 'Must be at least 18 years old'
+    },
+    {
+      validator: Validators.max(100),
+      message: 'Must be less than 100 years old'
+    }
+  ];
+```
 
 ## Base Directive Properties
 
