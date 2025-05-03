@@ -24,6 +24,7 @@ If you find this library helpful, please consider giving it a ⭐ on [GitHub](ht
 - 📝 Built-in form state tracking (touched, dirty, etc.)
 
 
+
 ## Installation
 
 ```bash
@@ -78,34 +79,20 @@ We just need to write all applicable validators and provide it to the control an
 You can create your own form controls by extending the `BaseCvaImplementationDirective`:
 
 ```typescript
-import { Component, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
-import { BaseCvaImplementationDirective } from 'ngx-custom-controls';
+import { Component, input } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { cvaProviders } from '../../shared/providers/cva-providers';
+import { BaseCvaImplementationDirective } from '../../shared/directives/base-cva-implementation.directive';
+import { ValidationMessagesComponent } from '../../shared/components/validation-messages/validation-messages.component';
 
 @Component({
-  selector: 'app-custom-control',
-  template: `
-    <input [id]="controlId()" #input [disabled]="disabled" [ngClass]="styleClass()" type="{{type()}}" [value]="value" (input)="onInputChange(input.value)"
-    (blur)="markAsTouched()" [attr.placeholder]="placeholder()"/>
-
-    @if(validationErrors && (isTouched || isDirty)) {
-        <ngcc-validation-messages [errorMessages]="errorMessages"></ngcc-validation-messages>
-        }
-  `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CustomControlComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => CustomControlComponent),
-      multi: true
-    }
-  ]
+  selector: 'ngcc-custom-input',
+  imports: [NgClass, ValidationMessagesComponent],
+  standalone: true,
+  templateUrl: './custom-input.component.html',
+  providers: [...cvaProviders(CustomInputComponent)]  
 })
-export class CustomControlComponent extends BaseCvaImplementationDirective<string> {
+export class CustomInputComponent extends BaseCvaImplementationDirective<string> {
   styleClass = input('form-control');
   placeholder = input('Enter');
   type = input('text');
@@ -113,6 +100,7 @@ export class CustomControlComponent extends BaseCvaImplementationDirective<strin
     this.value = '';
   }
 }
+
 ```
 In most cases you need not to write any code in your control it's only when you need to override something.
 
@@ -189,7 +177,6 @@ The `BaseCvaImplementationDirective` provides:
 - `validators`: Array of `ValidatorWithMessage[]`
 - `name`: Control name
 - `controlId`: Unique identifier
-- `disabled`: Disabled state
 
 ### Properties
 - `value`: Current control value
@@ -219,6 +206,13 @@ const validators = [
   }
 ];
 ```
+## Components included in library created with Bootstrap css
+- Custom input component
+- Custom select component
+- Custom range component
+- Custom Date picker components
+- Custom Checkbox
+- Custom Radio
 
 ## Contributing
 
@@ -230,4 +224,4 @@ const validators = [
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

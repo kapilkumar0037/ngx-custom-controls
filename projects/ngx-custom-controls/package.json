@@ -1,6 +1,6 @@
 {
   "name": "ngx-custom-controls",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0"
@@ -8,5 +8,16 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "author": "Kapil Kumar <kapilkumar0037@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapilkumar0037/ngx-custom-controls.git"
+  },
+  "keywords": [
+    "custom controls",
+    "angular"
+  ],
+  "homepage": "https://github.com/kapilkumar0037/ngx-custom-controls#readme",
   "sideEffects": false
 }
