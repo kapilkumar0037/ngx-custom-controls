@@ -1,9 +1,7 @@
-<input type="radio" #radio  [ngClass]="styleClass()" [disabled]="disabled"
-    [value]="option()" [checked]="value===option()" (change)="onInputChange(radio.value)" (blur)="onTouched()">
+<input type="radio" #radio [ngClass]="styleClass()" [disabled]="disabled" [value]="option()"
+    [checked]="value===option()" (change)="onInputChange(radio.value)" (blur)="onTouched()">
 <ng-content></ng-content>
 
 @if(validationErrors && (isTouched || isDirty)) {
-@for(error of errorMessages; track error){
-<div class="invalid-feedback d-block">{{ error }}</div>
-}
+<ngcc-validation-messages [errorMessages]="errorMessages"></ngcc-validation-messages>
 }

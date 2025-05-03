@@ -1,9 +1,7 @@
-<input [id]="controlId()" #checkbox [ngClass]="styleClass()" [disabled]="disabled" type="checkbox" [checked]="value" (change)="onInputChange(checkbox.checked)"
-    (blur)="onTouched()">
+<input [id]="controlId()" #checkbox [ngClass]="styleClass()" [disabled]="disabled" type="checkbox" [checked]="value"
+    (change)="onInputChange(checkbox.checked)" (blur)="onTouched()">
 <ng-content></ng-content>
 
 @if(validationErrors && (isTouched || isDirty)) {
-@for(error of errorMessages; track error){
-<div class="invalid-feedback d-block">{{ error }}</div>
-}
+<ngcc-validation-messages [errorMessages]="errorMessages"></ngcc-validation-messages>
 }
